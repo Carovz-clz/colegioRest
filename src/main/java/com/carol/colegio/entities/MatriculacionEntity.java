@@ -20,11 +20,11 @@ public class MatriculacionEntity {
 	@Column(name = "id")
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_asignatura")
 	private AsignaturaEntity asignaturas;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_alumno")
 	private AlumnoEntity alumnos;
 	

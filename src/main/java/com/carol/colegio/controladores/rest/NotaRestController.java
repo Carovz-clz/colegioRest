@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carol.colegio.dao.NotaDAO;
-import com.carol.colegio.dtos.AsignaturaDTO;
 import com.carol.colegio.dtos.NotaDTO;
 import com.carol.colegio.dtos.NotaRequestDTO;
-import com.carol.colegio.dtos.NotaRequestPutDTO;
-import com.carol.colegio.entities.AlumnoEntity;
 import com.carol.colegio.entities.NotaEntity;
 import com.carol.colegio.repositorios.NotaRepository;
 
@@ -70,7 +67,7 @@ public class NotaRestController {
 
 	// Actualizar notas
 	@PutMapping(value = "/notas")
-	public ResponseEntity<String> actualizarNota(@RequestBody NotaDTO nota) { //Crea una nueva
+	public ResponseEntity<String> actualizarNota(@RequestBody NotaDTO nota) { //Crea una nueva??
 
 		notaDAO.actualizarNota(nota.getId(), nota.getIdAlumno(), nota.getIdAsignatura(), nota.getNota(), nota.getFecha());
 		
