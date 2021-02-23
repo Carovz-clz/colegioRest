@@ -1,6 +1,7 @@
 package com.carol.colegio.dtos;
 
 public class MatriculacionRequestDTO {
+	private Integer id;
 	private Integer idAsignatura;
 	private Integer idAlumno;
 	private String fecha;
@@ -16,6 +17,27 @@ public class MatriculacionRequestDTO {
 		this.idAlumno = idAlumno;
 		this.fecha = fecha;
 		this.tasa = tasa;
+	}
+	
+	
+
+	public MatriculacionRequestDTO(Integer id, Integer idAsignatura, Integer idAlumno, String fecha, Double tasa) {
+		super();
+		this.id = id;
+		this.idAsignatura = idAsignatura;
+		this.idAlumno = idAlumno;
+		this.fecha = fecha;
+		this.tasa = tasa;
+	}
+	
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getIdAsignatura() {

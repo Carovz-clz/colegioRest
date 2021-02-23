@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carol.colegio.dao.MatriculacionDAO;
 import com.carol.colegio.dtos.MatriculacionDTO;
 import com.carol.colegio.dtos.MatriculacionRequestDTO;
+import com.carol.colegio.dtos.NotaDTO;
 import com.carol.colegio.dtos.NotaRequestDTO;
 import com.carol.colegio.entities.MatriculacionEntity;
 import com.carol.colegio.repositorios.MatriculaRepository;
@@ -61,8 +64,18 @@ public class MatriculaRestController {
 	@PostMapping("/matriculaciones")
 	public ResponseEntity<String> insertarMatriculacion(@RequestBody MatriculacionRequestDTO matriculacion) {
 
-		matriculaDAO.insertarMatriculacion(matriculacion.getIdAlumno(), matriculacion.getIdAsignatura(), matriculacion.getTasa(), matriculacion.getFecha());
+		matriculaDAO.insertarMatriculacion(matriculacion.getIdAlumno(), matriculacion.getIdAsignatura(),
+				matriculacion.getTasa(), matriculacion.getFecha());
 
 		return new ResponseEntity<>("Inserción matrícula correcta!", HttpStatus.OK);
+	}
+
+	// Borrar matriculaciones
+	@DeleteMapping(value = "/matriculaciones/{id}")
+	public ResponseEntity<String> borrarMatriculaciones(@PathVariable("id") Integer id) {
+
+		matriculaDAO.borrarMatriculacion(id);
+		
+		return new ResponseEntity<String>("Borrado de nota correcto!", HttpStatus.OK);
 	}
 }

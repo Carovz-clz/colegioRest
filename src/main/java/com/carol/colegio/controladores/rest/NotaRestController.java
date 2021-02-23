@@ -67,7 +67,7 @@ public class NotaRestController {
 
 	// Actualizar notas
 	@PutMapping(value = "/notas")
-	public ResponseEntity<String> actualizarNota(@RequestBody NotaDTO nota) { //Crea una nueva??
+	public ResponseEntity<String> actualizarNota(@RequestBody NotaDTO nota) { 
 
 		notaDAO.actualizarNota(nota.getId(), nota.getIdAlumno(), nota.getIdAsignatura(), nota.getNota(), nota.getFecha());
 		
