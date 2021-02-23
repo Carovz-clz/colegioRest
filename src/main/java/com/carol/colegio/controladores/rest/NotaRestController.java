@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carol.colegio.dao.NotaDAO;
 import com.carol.colegio.dtos.AsignaturaDTO;
 import com.carol.colegio.dtos.NotaDTO;
+import com.carol.colegio.dtos.NotaRequestDTO;
 import com.carol.colegio.entities.AlumnoEntity;
 import com.carol.colegio.entities.NotaEntity;
 import com.carol.colegio.repositorios.NotaRepository;
@@ -57,17 +58,13 @@ public class NotaRestController {
 	}
 
 	// Insertar notas
-//	@PostMapping("/notas")
-//	public ResponseEntity<String> insertarNota(
-//			@RequestParam ("idAlumno") Integer idAlumno,
-//			@RequestParam("idAsignatura") Integer idAsignatura,
-//			@RequestParam("nota") Double nota,
-//			@RequestParam("fecha") String fecha){
-//		
-//		
-//		
-//		return new ResponseEntity<>("Inserción nota correcta!", HttpStatus.OK);
-//	}
+	@PostMapping("/notas")
+	public ResponseEntity<String> insertarNota(@RequestBody NotaRequestDTO nota){
+		
+		notaDAO.insertarNota(nota.getIdAlumno(), nota.getIdAsignatura(), nota.getNota(), nota.getFecha());
+				
+		return new ResponseEntity<>("Inserción nota correcta!", HttpStatus.OK);
+	}
 
 	// Borrar notas
 	@DeleteMapping(value = "/notas/{id}")
