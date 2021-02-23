@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import com.carol.colegio.dao.NotaDAO;
 import com.carol.colegio.dtos.AsignaturaDTO;
 import com.carol.colegio.dtos.NotaDTO;
 import com.carol.colegio.dtos.NotaRequestDTO;
+import com.carol.colegio.dtos.NotaRequestPutDTO;
 import com.carol.colegio.entities.AlumnoEntity;
 import com.carol.colegio.entities.NotaEntity;
 import com.carol.colegio.repositorios.NotaRepository;
@@ -59,11 +61,20 @@ public class NotaRestController {
 
 	// Insertar notas
 	@PostMapping("/notas")
-	public ResponseEntity<String> insertarNota(@RequestBody NotaRequestDTO nota){
-		
+	public ResponseEntity<String> insertarNota(@RequestBody NotaRequestDTO nota) {
+
 		notaDAO.insertarNota(nota.getIdAlumno(), nota.getIdAsignatura(), nota.getNota(), nota.getFecha());
-				
+
 		return new ResponseEntity<>("Inserción nota correcta!", HttpStatus.OK);
+	}
+
+	// Actualizar notas
+	@PutMapping(value = "/notas")
+	public ResponseEntity<String> actualizarNota(@RequestBody NotaDTO nota) { //Crea una nueva
+
+		notaDAO.actualizarNota(nota.getId(), nota.getIdAlumno(), nota.getIdAsignatura(), nota.getNota(), nota.getFecha());
+		
+		return new ResponseEntity<>("Actualización nota correcta!", HttpStatus.OK);
 	}
 
 	// Borrar notas
