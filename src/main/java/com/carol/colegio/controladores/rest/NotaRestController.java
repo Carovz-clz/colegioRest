@@ -47,8 +47,8 @@ public class NotaRestController {
 	// Obtener notas por id, nombre, curso, tasa
 	@GetMapping(value = "/notas", params = { "id", "nombre", "asignatura", "nota", "fecha" })
 	public List<NotaDTO> listarNotaPorIdNombreAsignaturaNotaFehca(
-			@RequestParam(value = "id", required = false) Integer idAlumno,
-			@RequestParam(value = "nombre", required = false) String nombreAlumno,
+			@RequestParam(value = "idAlumno", required = false) Integer idAlumno,
+			@RequestParam(value = "nombreAlumno", required = false) String nombreAlumno,
 			@RequestParam(value = "asignatura", required = false) String asignatura,
 			@RequestParam(value = "nota", required = false) Double nota,
 			@RequestParam(value = "fecha", required = false) String fecha) {

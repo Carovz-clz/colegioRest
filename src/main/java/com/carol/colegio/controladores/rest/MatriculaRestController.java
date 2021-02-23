@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carol.colegio.dao.MatriculacionDAO;
 import com.carol.colegio.dtos.MatriculacionDTO;
 import com.carol.colegio.dtos.MatriculacionRequestDTO;
-import com.carol.colegio.dtos.NotaDTO;
-import com.carol.colegio.dtos.NotaRequestDTO;
+import com.carol.colegio.dtos.TasaDTO;
+import com.carol.colegio.dtos.TasaRequestDTO;
 import com.carol.colegio.entities.MatriculacionEntity;
+import com.carol.colegio.negocio.INegocio;
 import com.carol.colegio.repositorios.MatriculaRepository;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 @RestController
 @RequestMapping("/v1")
@@ -32,6 +33,9 @@ public class MatriculaRestController {
 
 	@Autowired
 	private MatriculacionDAO matriculaDAO;
+	
+	@Autowired
+	private INegocio negocio;
 
 	// Obtener todas las matriculaciones
 	@GetMapping(value = "/matriculaciones")
@@ -75,7 +79,15 @@ public class MatriculaRestController {
 	public ResponseEntity<String> borrarMatriculaciones(@PathVariable("id") Integer id) {
 
 		matriculaDAO.borrarMatriculacion(id);
-		
+
 		return new ResponseEntity<String>("Borrado de nota correcto!", HttpStatus.OK);
 	}
+
+	// Cálculo tasa
+	@PostMapping("/tasa")
+	public TasaDTO calculartasa(@RequestBody TasaRequestDTO tasa) {	
+		
+		return new TasaDTO(negocio.calcularTasa(tasa.getIdAlumno(), tasa.getIdAsignatura()));
+	}
+
 }
