@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carol.colegio.dao.AsignaturaDAO;
 import com.carol.colegio.dtos.AsignaturaDTO;
+import com.carol.colegio.entities.AlumnoEntity;
 import com.carol.colegio.entities.AsignaturaEntity;
 import com.carol.colegio.repositorios.AsignaturaRepository;
 
@@ -37,7 +38,19 @@ public class AsignaturaRestController {
 		return new ResponseEntity<>("Inserción de asignatura correcta!", HttpStatus.OK);
 	}
 	
-	//Obtener alumnos por id y nombre
+	//Obtener todas las asignaturas
+	@GetMapping(value = "/asignaturas")
+	public Iterable<AsignaturaEntity> listarTodasLasAsignaturas() {
+		return asignaturaRepository.findAll();
+	}
+	
+	//Obtener por id
+	@GetMapping(value = "/asignaturas/{id}")
+	public Optional<AsignaturaEntity> buscarAsignaturaPorId(@PathVariable("id") Integer id){
+		return asignaturaRepository.findById(id);
+	}
+	
+	//Obtener asignaturas por id, nombre, curso, tasa
 	@GetMapping(value = "/asignaturas", params = {"id", "nombre", "curso", "tasa"})
 	public List<AsignaturaDTO> listarAsignaturaPorIdNombreCursoTasa(
 			@RequestParam(value = "id", required = false) Integer id,
